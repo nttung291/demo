@@ -18,7 +18,7 @@ export const LayoutContainer = ({
   return (
     <SafeAreaView
       style={styles.container}
-      edges={disabledSafeView ? [] : ["top", "left", "right"]}
+      edges={disabledSafeView ? [] : ["top", "left", "right", "bottom"]}
       {...props}
     >
       {children}
@@ -29,7 +29,7 @@ export const LayoutContainer = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.grey900,
     paddingHorizontal: 24,
   },
 });

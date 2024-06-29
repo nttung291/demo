@@ -26,7 +26,7 @@ const BaseText = ({
     return [
       defaultStyle,
       {
-        color: color || "#000000",
+        color: color || "#FFFFFF",
         textDecorationLine: underline ? "underline" : "none",
       },
       (() => {

@@ -1,43 +1,45 @@
-import { HttpClient } from './service-layer/https-layer';
-import { get as _get } from 'lodash';
+import {
+  CryptocurrencyQuotesResponse,
+  CryptocurrencyQuotesRequest,
+} from "./types";
+import { getBaseQuery, getPrepareHeaders } from "./service-layer/query-layer";
+import { HTTPS_BASE_URL } from "./config";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { TokenPrice } from "@types";
+import _get from "lodash/get";
 
-const httpsClient = HttpClient.getInstance();
+export const tokenV2Api = createApi({
+  reducerPath: "tokenV2Api",
+  keepUnusedDataFor: 30,
+  refetchOnFocus: true,
+  refetchOnReconnect: true,
+  baseQuery: getBaseQuery({
+    baseUrl: `${HTTPS_BASE_URL}/v2/`,
+    prepareHeaders: (headers) => getPrepareHeaders(headers),
+  }),
+  endpoints: ({ query }) => ({
+    getV2CryptocurrencyQuotes: query<
+      CryptocurrencyQuotesResponse,
+      CryptocurrencyQuotesRequest
+    >({
+      query: ({ slug }) => ({
+        url: `cryptocurrency/quotes/latest`,
+        params: {
+          slug: slug,
+        },
+      }),
+      transformResponse: (response: { data: Record<string, TokenPrice> }) =>
+        response.data,
+    }),
+  }),
+});
 
-export const getFavoriteProductIds = async (): Promise<string[]> => {
-  return new Promise((resolve, reject) => {
-    httpsClient.get('favourites')
-      .then((response) => {
-        const products = _get(response, 'data.data', [])
-        resolve(products);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
+export const { useGetV2CryptocurrencyQuotesQuery } = tokenV2Api;
+
+export default {
+  [tokenV2Api.reducerPath]: tokenV2Api.reducer,
 };
 
-export const likeProducts = async (productId: string): Promise<Response> => {
-  return new Promise((resolve, reject) => {
-    httpsClient.patch(`favourites/${productId}`)
-      .then((response) => {
-        const products = _get(response, 'data.data', [])
-        resolve(products);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
-};
+export const tokenV2ApiMiddlewares = [tokenV2Api.middleware];
 
-export const unlikeProducts = async (productId: string): Promise<Response> => {
-  return new Promise((resolve, reject) => {
-    httpsClient.delete(`favourites/${productId}`)
-      .then((response) => {
-        const products = _get(response, 'data.data', [])
-        resolve(products);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
-};
+export const tokenV2ApiReducerPaths = [tokenV2Api.reducerPath];

@@ -1,13 +1,13 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { GenericError } from "./errors";
-import { HTTPS_BASE_URL, APP_API_KEY, APP_ACCOUNT_NAME } from "../config";
+import { HTTPS_BASE_URL, APP_API_KEY } from "../config";
 
 export type ApiResponse = AxiosResponse;
 export class HttpClient {
   private static instance: HttpClient;
 
   static client = axios.create({
-    baseURL: `${HTTPS_BASE_URL}/${APP_ACCOUNT_NAME}`,
+    baseURL: `${HTTPS_BASE_URL}`,
     timeout: 30000,
     headers: {
       Accepts: "application/json",

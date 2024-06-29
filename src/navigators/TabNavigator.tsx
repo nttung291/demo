@@ -1,6 +1,6 @@
-import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { AddEditOrderStackScreen, OrderStackScreen } from './ScreenNavigator';
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { HomeScreen } from "@screens";
 
 export type IconProps = {
   name: string;
@@ -13,19 +13,13 @@ export function MainTabNavigator() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-      }}>
+      }}
+    >
       <Tab.Screen
-        name={'OrdersTab'}
-        component={OrderStackScreen}
+        name={"HomeTab"}
+        component={HomeScreen}
         options={{
-          tabBarLabel: 'Orders',
-        }}
-      />
-      <Tab.Screen
-        name={'AddOrderTab'}
-        component={AddEditOrderStackScreen}
-        options={{
-          tabBarLabel: 'Add New',
+          tabBarLabel: "Orders",
         }}
       />
     </Tab.Navigator>
