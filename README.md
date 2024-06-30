@@ -70,4 +70,9 @@ From the command line in your generated app's root directory, enter `yarn ios`
 
 From the command line in your generated app's root directory, enter `yarn android`
 
+## Screenshots
+
+![Uploading Simulator Screenshot - iPhone 15 Pro - 2024-06-30 at 16.23.28.png…]()
+![Screenshot_20240630_173725](https://github.com/nttung291/demo/assets/29893869/b32b9ddb-bdd2-4b08-8566-98113e601359)
+
 
