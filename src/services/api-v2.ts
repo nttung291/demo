@@ -10,7 +10,7 @@ import _get from "lodash/get";
 
 export const tokenV2Api = createApi({
   reducerPath: "tokenV2Api",
-  keepUnusedDataFor: 30,
+  keepUnusedDataFor: 60,
   refetchOnFocus: true,
   refetchOnReconnect: true,
   baseQuery: getBaseQuery({

@@ -1,50 +1,73 @@
-# Welcome to your Expo app 👋
+## DemoApp
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Currently includes:
 
-## Get started
+- React Native
+- React Navigation
+- Expo
+- Redux
+- TypeScript
+- And more!
 
-1. Install dependencies
+## Quick Start
 
-   ```bash
-   npm install
-   ```
+From the command line in your generated app's root directory, enter `yarn`
 
-2. Start the app
+The Demo project's structure will look similar to this:
 
-   ```bash
-    npx expo start
-   ```
+```
+demo
+├── src
+│   ├── assets
+│   ├── components
+│   ├── context
+│   ├── helpers
+│   ├── navigators
+│   ├── screens
+│   ├── services
+│   ├── storage
+│   ├── theme
+│   ├── app.tsx
+├── README.md
+├── index.js
+├── test
+├── .env
+└── package.json
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+**assets**
+This is where your app assets will live.
 
-## Learn more
+**components**
+This is where your React components will live. Each component will have a directory containing the `.tsx` file, along with a story file, and optionally `.presets`, and `.props` files for larger components. The app will come with some commonly used components like Button.
 
-To learn more about developing your project with Expo, look at the following resources:
+**navigators**
+This is where your `react-navigation` navigators will live.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+**context**
+This is where your context api will live. Each Context will have a directory containing the `.tsx` file.
 
-## Join the community
+**screens**
+This is where your screen components will live. A screen is a React component which will take up the entire screen and be part of the navigation hierarchy. Each screen will have a directory containing the `.tsx` file, along with any assets or other helper files.
 
-Join our community of developers creating universal apps.
+**services**
+Any services that interface with the outside world will live here (think REST APIs, Push Notifications, etc.).
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+**theme**
+Here lives the theme for your application, including spacing, colors, and typography.
+
+**helpers**
+This is a great place to put miscellaneous helpers and utilities. Things like date helpers, formatters, etc. are often found here. However, it should only be used for things that are truely shared across your application. If a helper or utility is only used by a specific component or model, consider co-locating your helper with that component or model.
+
+**app.tsx** This is the entry point to your app. This is where you will find the main App component which renders the rest of the application.
+
+## Running IOS
+
+From the command line in your generated app's root directory, enter `yarn ios`
+
+## Running Android
+
+From the command line in your generated app's root directory, enter `yarn android`
+
+
