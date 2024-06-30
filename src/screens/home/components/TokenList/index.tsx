@@ -20,8 +20,8 @@ export const TokenList: React.FC<Props> = ({ search }) => {
   const [shouldUpdatePrices, setShouldUpdatePrices] = useState<boolean>(false);
   const [visibleItems, setVisibleItems] = useState<Token[]>([]);
 
-  const visibleSlugs = useMemo(
-    () => visibleItems?.map((item) => item.slug).join(","),
+  const visibleIds = useMemo(
+    () => visibleItems?.map((item) => item.id).join(","),
     [visibleItems]
   );
 
@@ -33,7 +33,7 @@ export const TokenList: React.FC<Props> = ({ search }) => {
     isFetching,
     isSuccess,
   } = useGetV2CryptocurrencyQuotesQuery(
-    { slug: visibleSlugs },
+    { id: visibleIds },
     {
       skip: _isEmpty(visibleItems),
       pollingInterval: 60000,

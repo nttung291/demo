@@ -16,7 +16,7 @@ export type CryptocurrencyListingsRequest = {
 export type CryptocurrencyListingsResponse = Token[];
 
 export type CryptocurrencyQuotesRequest = {
-  id?: number[];
+  id?: string;
   slug?: string;
   symbol?: string;
 };

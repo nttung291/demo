@@ -22,11 +22,14 @@ export const tokenV2Api = createApi({
       CryptocurrencyQuotesResponse,
       CryptocurrencyQuotesRequest
     >({
-      query: ({ slug }) => ({
+      query: ({ id }) => ({
         url: `cryptocurrency/quotes/latest`,
         params: {
-          slug: slug,
+          id: id,
         },
+        // params: {
+        //   slug: slug,
+        // },
       }),
       transformResponse: (response: { data: Record<string, TokenPrice> }) =>
         response.data,
