@@ -15,16 +15,13 @@ import {
 import reducers from "./reducers";
 import {
   tokenV1ApiMiddlewares,
-  tokenV1ApiReducerPaths,
   tokenV2ApiMiddlewares,
-  tokenV2ApiReducerPaths,
   serviceReducer,
 } from "@services";
 
 const persistConfig = {
   key: "root",
   storage: AsyncStorage,
-  // blacklist: [...tokenV1ApiReducerPaths, ...tokenV2ApiReducerPaths],
   blacklist: [],
 };
 
