@@ -13,6 +13,8 @@ Currently includes:
 
 From the command line in your generated app's root directory, enter `yarn`
 
+From the demo/ios folder, enter `pod install`
+
 The Demo project's structure will look similar to this:
 
 ```
@@ -69,10 +71,3 @@ From the command line in your generated app's root directory, enter `yarn ios`
 ## Running Android
 
 From the command line in your generated app's root directory, enter `yarn android`
-
-## Screenshots
-
-![Simulator Screenshot - iPhone 15 Pro - 2024-06-30 at 16 23 28](https://github.com/nttung291/demo/assets/29893869/654d6009-6d9d-4eb2-9e27-47bf434c2b02)
-![Screenshot_20240630_173725](https://github.com/nttung291/demo/assets/29893869/a29de716-36d0-444c-97f4-5f013ff1c89d)
-
-

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "expo start",
+    "pod-install": "cd ios && pod install && chmod -R 777 Pods && cd ..",
     "reset-project": "node ./scripts/reset-project.js",
     "android": "expo run:android",
     "ios": "expo run:ios",
