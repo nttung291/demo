@@ -1,7 +1,7 @@
 import React from "react";
 import { TouchableOpacity, View, StyleSheet } from "react-native";
 import { MD2Colors as Colors, TextInput } from "react-native-paper";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 type Props = {
   autoFocus?: boolean;
