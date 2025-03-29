@@ -4,7 +4,6 @@ Currently includes:
 
 - React Native
 - React Navigation
-- Expo
 - Redux
 - TypeScript
 - And more!

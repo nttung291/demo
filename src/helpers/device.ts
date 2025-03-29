@@ -17,7 +17,7 @@ const IP12_HEIGHT = 844;
 const IP12MAX_WIDTH = 428;
 const IP12MAX_HEIGHT = 926;
 
-const {height: W_HEIGHT, width: W_WIDTH} = Dimensions.get('window');
+export const {height: W_HEIGHT, width: W_WIDTH} = Dimensions.get('window');
 
 let statusBarHeight = STATUSBAR_DEFAULT_HEIGHT;
 let isIPhoneX_v = false;

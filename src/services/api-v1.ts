@@ -1,10 +1,8 @@
 import {
-  CryptocurrencyListingsResponse,
-  CryptocurrencyListingsRequest,
+  GamesResponse,
 } from "./types";
 import { getBaseQuery, getPrepareHeaders } from "./service-layer/query-layer";
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { Token } from "@types";
 import { HTTPS_BASE_URL } from "./config";
 import _get from "lodash/get";
 
@@ -14,29 +12,24 @@ export const tokenV1Api = createApi({
   refetchOnFocus: true,
   refetchOnReconnect: true,
   baseQuery: getBaseQuery({
-    baseUrl: `${HTTPS_BASE_URL}/v1/`,
+    baseUrl: `${HTTPS_BASE_URL}/`,
     prepareHeaders: (headers) => getPrepareHeaders(headers),
   }),
   endpoints: ({ query }) => ({
-    getV1CryptocurrencyListings: query<
-      CryptocurrencyListingsResponse,
-      CryptocurrencyListingsRequest
+    getGames: query<
+      GamesResponse,
+      {}
     >({
-      query: ({ start, limit }) => ({
-        url: `cryptocurrency/listings/latest`,
-        params: {
-          start,
-          limit,
-        },
+      query: ({}) => ({
+        url: `games?slug=dino-runner-3d`,
       }),
-      transformResponse: (response: { data: Token[] }) => response.data,
+      transformResponse: (response: { data: GamesResponse}) => response.data,
     }),
   }),
 });
 
 export const {
-  useGetV1CryptocurrencyListingsQuery,
-  useLazyGetV1CryptocurrencyListingsQuery,
+  useGetGamesQuery,
 } = tokenV1Api;
 
 export default {

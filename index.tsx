@@ -1,7 +1,4 @@
-/**
- * @format
- */
-import { registerRootComponent } from "expo";
+import { AppRegistry } from "react-native";
 import App from "./src/app";
 
-registerRootComponent(App);
+AppRegistry.registerComponent("SimpleInvoice", () => App);

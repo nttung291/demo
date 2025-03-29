@@ -21,7 +21,7 @@ export const getBaseQuery =
 
 export const getPrepareHeaders = async (headers: Headers) => {
   try {
-    headers.set("X-CMC_PRO_API_KEY", APP_API_KEY);
+    // headers.set("X-CMC_PRO_API_KEY", APP_API_KEY);
     headers.set("content-type", "application/json");
   } catch (e) {
     return headers;

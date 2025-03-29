@@ -4,6 +4,6 @@ import _get from "lodash/get";
 import { View } from "react-native";
 import styles from "./styles";
 
-export const HomeScreen: React.FunctionComponent = () => {
+export const LoginScreen: React.FunctionComponent = () => {
   return <LayoutContainer></LayoutContainer>;
 };
