@@ -1,11 +1,18 @@
 ## DemoApp
 
+A modern React Native application showcasing best practices in mobile development.
+
 Currently includes:
 
-- React Native
-- React Navigation
-- Redux
-- TypeScript
+- React Native (0.74.5)
+- React Navigation (Stack, Bottom Tabs, Native)
+- Redux with Redux Toolkit for state management
+- TypeScript for type safety
+- Form handling with Formik and Yup validation
+- API integration with Axios and GraphQL
+- Secure storage with Keychain
+- Performance optimized with FlashList
+- Automated UI testing with Detox
 - And more!
 
 ## Quick Start
@@ -70,3 +77,64 @@ From the command line in your generated app's root directory, enter `yarn ios`
 ## Running Android
 
 From the command line in your generated app's root directory, enter `yarn android`
+
+## Testing
+
+The project includes both unit tests and end-to-end (E2E) UI tests.
+
+### Unit Testing
+
+Unit tests are written using Jest. Run the tests with:
+
+```bash
+yarn test
+```
+
+### End-to-End Testing with Detox
+
+The project uses Detox for automated UI testing. Detox allows you to write and execute UI tests that simulate real user interactions.
+
+#### Prerequisites
+
+Before running Detox tests, make sure you have the following installed:
+
+```bash
+# For iOS testing
+brew tap wix/brew
+brew install applesimutils
+```
+
+#### Running E2E Tests
+
+For iOS:
+
+```bash
+# Build the app for testing
+yarn e2e:build:ios
+
+# Run the tests
+yarn e2e:test:ios
+```
+
+For Android:
+
+```bash
+# Build the app for testing
+yarn e2e:build:android
+
+# Run the tests
+yarn e2e:test:android
+```
+
+#### Test Structure
+
+E2E tests are located in the `e2e` directory:
+
+- `e2e/login.test.js` - Tests for the Login screen functionality
+- `e2e/jest.setup.js` - Setup file for Jest with Detox
+- `e2e/jest.config.js` - Jest configuration for Detox tests
+
+For more detailed information about Detox testing in this project, see the [e2e/README.md](./e2e/README.md) file.
+
+## Project Structure
+

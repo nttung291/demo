@@ -1,11 +1,10 @@
-import React, { useMemo, useState } from "react";
+import React from "react";
 import { View } from "react-native";
 import { useFormik } from "formik";
 import { Button, H1, Input, LayoutContainer } from "@components";
 import {
   PasswordSchema,
   setKeychainItem,
-  StorageKey,
   UsernameSchema,
 } from "@helpers";
 import { useLazyGetUserQuery, useLoginMutation } from "@services";
@@ -60,11 +59,12 @@ export const LoginScreen: React.FunctionComponent = () => {
       },
     });
   return (
-    <LayoutContainer>
+    <LayoutContainer testID="login-screen">
       <View style={styles.container}>
-        <H1>Login</H1>
+        <H1 testID="login-title">Login</H1>
         <View style={styles.inputContainer}>
           <Input
+            testID="username-input"
             containerStyle={styles.input}
             onChangeText={handleChange("username")}
             value={values.username}
@@ -73,6 +73,7 @@ export const LoginScreen: React.FunctionComponent = () => {
             keyboardType="number-pad"
           />
           <Input
+            testID="password-input"
             containerStyle={styles.input}
             onChangeText={handleChange("password")}
             value={values.password}
@@ -82,6 +83,7 @@ export const LoginScreen: React.FunctionComponent = () => {
           />
         </View>
         <Button
+          testID="login-button"
           style={styles.button}
           type="medium"
           onPress={handleSubmit}
