@@ -11,9 +11,9 @@ import { deleteKeychainItem, Ordering, SortBy } from "@helpers";
 import { setAuthenticated, useAppDispatch } from "@state";
 import { InvoiceResponse } from "@types";
 import { InvoiceItem } from "./components/InvoiceItem";
-import styles from "./styles";
 import { FilterModal } from "./components/FilterModal";
 import { navigate, ScreenNavigatorKeys } from "@navigators";
+import styles from "./styles";
 
 type Options = {
   sortBy?: string;

@@ -1,4 +1,4 @@
-// Should be config in .env
+// Should be config in .env with configuration for dev, staging and prod
 export const GRAPHCMS_ENDPOINT = "";
 export const GRAPHCMS_TOKEN = "";
 export const AUTH_HTTPS_BASE_URL = "https://is-101digital-sandbox.101digital.io";
