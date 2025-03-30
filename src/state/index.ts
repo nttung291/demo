@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { combineReducers } from "redux";
@@ -14,8 +15,8 @@ import {
 } from "redux-persist";
 import reducers from "./reducers";
 import {
-  tokenV1ApiMiddlewares,
-  tokenV2ApiMiddlewares,
+  authApiMiddlewares,
+  appApiMiddlewares,
   serviceReducer,
 } from "@services";
 
@@ -39,14 +40,17 @@ export const store = configureStore({
         warnAfter: 128,
       },
       immutableCheck: false,
-    }).concat(...[...tokenV1ApiMiddlewares, ...tokenV2ApiMiddlewares]),
+    }).concat([...authApiMiddlewares, ...appApiMiddlewares]),
 });
 
 export const persistor = persistStore(store);
 
 setupListeners(store.dispatch);
 
+export * from './reducers'
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch: () => AppDispatch = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

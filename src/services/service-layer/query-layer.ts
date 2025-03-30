@@ -5,24 +5,41 @@ import {
   FetchBaseQueryError,
   fetchBaseQuery,
 } from "@reduxjs/toolkit/query";
-import { APP_API_KEY } from "../config";
+import { getKeychainItem, StorageKey } from "@helpers";
 
 export const getBaseQuery =
-  (_args: FetchBaseQueryArgs) =>
+  (_args: FetchBaseQueryArgs, isAuth = false) =>
   async (
     args: string | FetchArgs,
     api: BaseQueryApi,
     extraOptions: FetchBaseQueryError | Record<string, unknown> = {}
   ) => {
     const baseQuery = fetchBaseQuery(_args);
-    const response = await baseQuery(args, api, extraOptions);
-    return response;
+    if (isAuth && typeof args === 'object' && typeof args.body === 'object' && args.body) {
+      // If args has a body object, convert it to URLSearchParams
+      const newArgs = {
+        ...args,
+        body: new URLSearchParams(args.body).toString()
+      };
+      return await baseQuery(newArgs, api, extraOptions);
+    }
+    return await baseQuery(args, api, extraOptions);
   };
 
-export const getPrepareHeaders = async (headers: Headers) => {
+export const getPrepareHeaders = async (headers: Headers, isAuth = false) => {
   try {
-    // headers.set("X-CMC_PRO_API_KEY", APP_API_KEY);
-    headers.set("content-type", "application/json");
+    if (isAuth) {
+      headers.set("content-type", "application/x-www-form-urlencoded");
+    } else {
+      headers.set("content-type", "application/json");
+      const { accessToken, orgToken } = await getKeychainItem()
+      if (accessToken) {
+        headers.set("Authorization", `Bearer ${accessToken}`);
+      }
+      if (orgToken) {
+        headers.set("'org-token:", `${orgToken}`);
+      }
+    }
   } catch (e) {
     return headers;
   }

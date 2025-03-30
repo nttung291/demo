@@ -1,9 +1,12 @@
-import React, { ComponentProps, ReactNode, useMemo } from 'react';
-import { Button as DefaultButton } from 'react-native-paper';
-import { StyleProp, ViewStyle, TextStyle, Platform } from 'react-native';
+import React, { ComponentProps, ReactNode, useMemo } from "react";
+import {
+  Button as DefaultButton,
+  MD2Colors as Colors,
+} from "react-native-paper";
+import { StyleProp, ViewStyle, TextStyle, Platform } from "react-native";
 
-type ButtonType = 'small' | 'medium' | 'large';
-type ButtonMode = 'outlined' | 'contained' | 'text';
+type ButtonType = "small" | "medium" | "large";
+type ButtonMode = "outlined" | "contained" | "text";
 export type ButtonProps = {
   type?: ButtonType;
   style?: StyleProp<ViewStyle>;
@@ -16,20 +19,20 @@ export type ButtonProps = {
   children: ReactNode;
 } & Omit<
   ComponentProps<typeof DefaultButton>,
-  'style' | 'contentStyle' | 'labelStyle' | 'disabled' | 'mode' | 'uppercase'
+  "style" | "contentStyle" | "labelStyle" | "disabled" | "mode" | "uppercase"
 >;
 
 export const getFontWeight = (bold?: boolean): StyleProp<TextStyle> => {
-  if (Platform.OS === 'ios') {
+  if (Platform.OS === "ios") {
     return {
-      fontFamily: 'IBM Plex Sans',
-      fontWeight: bold ? 'bold' : 'normal',
+      fontFamily: "IBM Plex Sans",
+      fontWeight: bold ? "bold" : "normal",
     };
   }
 
-  if (Platform.OS === 'android') {
+  if (Platform.OS === "android") {
     return {
-      fontFamily: bold ? 'IBMPlexSans-Bold' : 'IBMPlexSans-Regular',
+      fontFamily: bold ? "IBMPlexSans-Bold" : "IBMPlexSans-Regular",
     };
   }
 };
@@ -42,7 +45,7 @@ export const Button = ({
   contentStyle,
   labelStyle,
   disabled,
-  mode,
+  mode = "contained",
   uppercase = false,
   ...props
 }: ButtonProps): JSX.Element => {
@@ -52,11 +55,11 @@ export const Button = ({
         opacity: disabled ? 0.5 : 1,
         borderRadius: (() => {
           switch (type) {
-            case 'small':
+            case "small":
               return 4;
-            case 'medium':
+            case "medium":
               return 8;
-            case 'large':
+            case "large":
               return 12;
             default:
               return 12;
@@ -64,11 +67,11 @@ export const Button = ({
         })(),
         borderWidth: (() => {
           switch (mode) {
-            case 'text':
+            case "text":
               return 0;
-            case 'contained':
+            case "contained":
               return 0;
-            case 'outlined':
+            case "outlined":
               return 1;
             default:
               return 0;
@@ -76,8 +79,8 @@ export const Button = ({
         })(),
         borderColor: (() => {
           switch (mode) {
-            case 'outlined':
-              return active ? '#000000' : '#D6D6D6';
+            case "outlined":
+              return active ? "#000000" : "#D6D6D6";
             default:
               return undefined;
           }
@@ -85,7 +88,7 @@ export const Button = ({
       },
       style,
     ],
-    [mode, type, active, disabled, style],
+    [mode, type, active, disabled, style]
   );
 
   const customContentStyle = useMemo<StyleProp<ViewStyle>>(
@@ -93,11 +96,11 @@ export const Button = ({
       {
         height: (() => {
           switch (type) {
-            case 'small':
+            case "small":
               return 38;
-            case 'medium':
+            case "medium":
               return 46;
-            case 'large':
+            case "large":
               return 60;
             default:
               return 60;
@@ -105,12 +108,12 @@ export const Button = ({
         })(),
         backgroundColor: (() => {
           switch (mode) {
-            case 'contained':
-              return disabled ? '#000000' : '#082052';
-            case 'outlined':
-              return '#FFFFFF';
-            case 'text':
-              return active ? '#082052' : undefined;
+            case "contained":
+              return disabled ? "#000000" : Colors.green400;
+            case "outlined":
+              return "#FFFFFF";
+            case "text":
+              return active ? "#FFFFFF" : undefined;
             default:
               return undefined;
           }
@@ -118,7 +121,7 @@ export const Button = ({
       },
       contentStyle,
     ],
-    [mode, type, active, disabled, contentStyle],
+    [mode, type, active, disabled, contentStyle]
   );
 
   const customLabelStyle = useMemo<StyleProp<TextStyle>>(
@@ -126,11 +129,11 @@ export const Button = ({
       {
         fontSize: (() => {
           switch (type) {
-            case 'small':
+            case "small":
               return 16;
-            case 'medium':
+            case "medium":
               return 18;
-            case 'large':
+            case "large":
               return 18;
             default:
               return 18;
@@ -138,11 +141,11 @@ export const Button = ({
         })(),
         lineHeight: (() => {
           switch (type) {
-            case 'small':
+            case "small":
               return 22;
-            case 'medium':
+            case "medium":
               return 23;
-            case 'large':
+            case "large":
               return 23;
             default:
               return 23;
@@ -150,19 +153,19 @@ export const Button = ({
         })(),
         color: (() => {
           switch (mode) {
-            case 'contained':
-              return '#FFFFFF';
+            case "contained":
+              return "#FFFFFF";
             default:
-              return '#000000';
+              return "#FFFFFF";
           }
         })(),
         marginVertical: (() => {
           switch (type) {
-            case 'small':
+            case "small":
               return 8;
-            case 'medium':
+            case "medium":
               return 12;
-            case 'large':
+            case "large":
               return 16;
             default:
               return 16;
@@ -173,11 +176,11 @@ export const Button = ({
       },
       (() => {
         switch (mode) {
-          case 'contained':
+          case "contained":
             return getFontWeight(true);
-          case 'outlined':
+          case "outlined":
             return getFontWeight(active);
-          case 'text':
+          case "text":
             return getFontWeight(true);
           default:
             return getFontWeight(true);
@@ -185,7 +188,7 @@ export const Button = ({
       })(),
       labelStyle,
     ],
-    [mode, type, active, labelStyle],
+    [mode, type, active, labelStyle]
   );
 
   return (
@@ -196,7 +199,8 @@ export const Button = ({
       style={customStyle}
       contentStyle={customContentStyle}
       labelStyle={customLabelStyle}
-      {...props}>
+      {...props}
+    >
       {children}
     </DefaultButton>
   );

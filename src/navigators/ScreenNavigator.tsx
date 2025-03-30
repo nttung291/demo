@@ -3,7 +3,7 @@ import {
   StackNavigationOptions,
   createStackNavigator,
 } from "@react-navigation/stack";
-import { HomeScreen, LoginScreen } from "@screens";
+import { HomeScreen, LoginScreen, NewInvoiceScreen } from "@screens";
 import { RootStackParamList } from "@types";
 
 const defaultOptions: StackNavigationOptions = {
@@ -26,6 +26,7 @@ const defaultOptions: StackNavigationOptions = {
 export const enum ScreenNavigatorKeys {
   Home = "Home",
   Login = "Login",
+  NewInvoice = "NewInvoice",
 }
 
 const AppStack = createStackNavigator<RootStackParamList>();
@@ -36,6 +37,11 @@ export function MainStackScreen() {
       <AppStack.Screen
         name={ScreenNavigatorKeys.Home}
         component={HomeScreen}
+        options={defaultOptions}
+      />
+      <AppStack.Screen
+        name={ScreenNavigatorKeys.NewInvoice}
+        component={NewInvoiceScreen}
         options={defaultOptions}
       />
     </AppStack.Navigator>

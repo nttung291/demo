@@ -1,3 +1,5 @@
+import { Error } from "@types";
+
 // Dollar formatter
 export const SmallUSDollar = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 1,
@@ -44,3 +46,12 @@ export const convertPercentChange = (value: number) => {
   }
   return "--";
 };
+
+export function isErrorResponse(error: unknown): error is Error {
+  return (
+    !!error &&
+    typeof error === "object" &&
+    typeof (error as Error).data === "object" &&
+    typeof (error as Error).data?.error_description === 'string'
+  );
+}

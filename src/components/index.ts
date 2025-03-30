@@ -7,3 +7,4 @@ export * from "./IconButton";
 export * from "./NumericInput";
 export * from "./PaginationList";
 export * from "./SearchBar";
+export * from "./Input";

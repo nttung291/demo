@@ -17,20 +17,13 @@ export const SearchBar = ({
   onChangeText,
   onSearchPress,
   onClearPress,
-  placeholder = "",
+  placeholder = "Search",
   value,
   autoFocus = false,
   ...rest
 }: Props) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        onPress={onSearchPress}
-        style={styles.searchIconContainer}
-        disabled={!onSearchPress}
-      >
-        <Ionicons name="search-outline" size={24} />
-      </TouchableOpacity>
       <TextInput
         autoFocus={autoFocus}
         style={styles.searchInput}
@@ -48,33 +41,20 @@ export const SearchBar = ({
         value={value}
         {...rest}
       />
-      {value && (
-        <TouchableOpacity
-          onPress={onClearPress}
-          style={styles.clearIconContainer}
-        >
-          <Ionicons name="close-outline" size={32} />
-        </TouchableOpacity>
-      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: Colors.grey300,
     borderRadius: 25,
     height: 50,
     justifyContent: "center",
-    marginBottom: 10,
-  },
-  searchIconContainer: {
-    position: "absolute",
-    left: 18,
   },
   searchInput: {
-    paddingLeft: 36,
-    paddingRight: 36,
+    width: "100%",
     borderRadius: 25,
     height: 50,
     backgroundColor: "transparent",

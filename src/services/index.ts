@@ -1,10 +1,9 @@
-import tokenV1Api from "./api-v1";
-import tokenV2Api from "./api-v2";
-
-export * from "./api-v1";
-export * from "./api-v2";
+import authApi from "./authApi";
+import appApi from "./appApi";
+export * from "./authApi";
+export * from "./appApi";
 
 export const serviceReducer = {
-  ...tokenV1Api,
-  ...tokenV2Api,
+  ...authApi,
+  ...appApi,
 };

@@ -10,7 +10,7 @@ import { CombinedDefaultTheme } from "./theme";
 import { AppNavigator } from "../src/navigators";
 import { Provider } from "react-redux";
 import "react-native-gesture-handler";
-import { store, persistor } from "./state/store";
+import { store, persistor } from "./state";
 
 const App = () => {
   return (

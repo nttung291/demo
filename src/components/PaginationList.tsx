@@ -1,91 +1,89 @@
-import React, {
-  ReactElement,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { ReactElement, useCallback, useEffect, useState } from "react";
 import { FlashList } from "@shopify/flash-list";
 import { ActivityIndicator, RefreshControl } from "react-native";
-import { TOKEN_LISTING_LIMIT } from "@helpers";
+import { LISTING_LIMIT } from "@helpers";
+import { useIsFocused } from "@react-navigation/native";
 import _isEmpty from "lodash/isEmpty";
-import _get from "lodash/get";
 import _debounce from "lodash/debounce";
 
 type Props<T> = {
   items: T[];
+  filters: object;
   setItems: (arr: T[]) => void;
   setVisibleItems?: (arr: T[]) => void;
   renderItem: ({ item, index }: { item: T; index: number }) => ReactElement;
-  getData: (start: number, limit: number) => Promise<unknown>;
+  getData: (page: number, limit: number) => Promise<T[]>;
   ListEmptyComponent?: ReactElement;
 };
 
 export const PaginationList: React.FC<Props<any>> = ({
   items,
+  filters,
   setItems,
   renderItem,
   getData,
   ListEmptyComponent,
-  setVisibleItems,
 }) => {
-  const [start, setStart] = useState(1);
-  const [isLoadMore, setIsLoadMore] = useState(false);
+  const isFocused = useIsFocused();
+  const [page, setPage] = useState(1);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [loadMore, setLoadMore] = useState(true);
+
+  const fetchDebounce = useCallback(
+    _debounce((page, limit?: number) => {
+      fetchData(page, limit);
+    }, 800),
+    []
+  );
 
   useEffect(() => {
-    fetchData(start, false);
-  }, []);
+    if (isFocused) {
+      fetchData(1, LISTING_LIMIT * page);
+      setLoadMore(true);
+    }
+  }, [isFocused]);
 
-  const fetchData = async (start: number, isLoadMore: boolean) => {
+  useEffect(() => {
+    setPage(1);
+    fetchDebounce(1);
+  }, [filters]);
+
+  const fetchData = async (page: number, limit = LISTING_LIMIT) => {
     try {
-      const response = await getData(start, TOKEN_LISTING_LIMIT);
-      const dataArray = _get(response, "data", []);
-      if (isLoadMore && dataArray.length > 0) {
-        setItems([...items, ...dataArray]);
-      } else {
-        setItems(dataArray);
-      }
+      const dataArray = await getData(page, limit);
       stopLoadingIndicator();
+      if (dataArray.length === 0) {
+        setLoadMore(false);
+        return;
+      }
+      if (page === 1) {
+        setItems(dataArray);
+      } else {
+        setItems([...items, ...dataArray]);
+      }
     } catch (err) {
       stopLoadingIndicator();
     }
   };
 
-  const debouncedSetVisibleItems = useCallback(
-    _debounce((items) => {
-      if (!setVisibleItems) return;
-      setVisibleItems(items);
-    }, 2000),
-    [setVisibleItems]
-  );
-
-  const onViewableItemsChanged = useRef(
-    ({ viewableItems }: { viewableItems: any }) => {
-      if (!setVisibleItems) return;
-      debouncedSetVisibleItems(
-        viewableItems.map((item: { item: any }) => item.item)
-      );
-    }
-  ).current;
-
   const stopLoadingIndicator = () => {
-    setIsLoadMore(false);
+    setIsLoadingMore(false);
     setIsRefreshing(false);
   };
 
   const handleLoadMore = () => {
-    if (!isRefreshing && !isLoadMore && !_isEmpty(items)) {
-      fetchData(start + TOKEN_LISTING_LIMIT, true);
-      setStart((prevStart) => prevStart + TOKEN_LISTING_LIMIT);
-      setIsLoadMore(true);
+    if (!isRefreshing && !isLoadingMore && !_isEmpty(items) && loadMore) {
+      fetchData(page + 1);
+      setPage(page + 1);
+      setIsLoadingMore(true);
     }
   };
 
   const handleRefresh = () => {
-    if (!isRefreshing && !isLoadMore) {
-      setStart(1);
-      fetchData(1, false);
+    if (!isRefreshing && !isLoadingMore) {
+      setPage(1);
+      fetchData(1);
       setIsRefreshing(true);
     }
   };
@@ -93,30 +91,26 @@ export const PaginationList: React.FC<Props<any>> = ({
   return (
     <FlashList
       data={items}
-      keyExtractor={(item) => item?.id?.toString()}
+      keyExtractor={(item) => item?.invoiceId}
       renderItem={renderItem}
       estimatedItemSize={100}
       showsVerticalScrollIndicator={false}
       onEndReachedThreshold={0.5}
       onEndReached={handleLoadMore}
       ListFooterComponent={() => {
-        if (!isLoadMore || isRefreshing) return null;
+        if (!isLoadingMore || isRefreshing) return null;
         return <ActivityIndicator />;
       }}
       ListEmptyComponent={() => {
-        if (!isRefreshing) {
-          return <ActivityIndicator />;
-        }
         if (!ListEmptyComponent || isRefreshing) return null;
         return ListEmptyComponent;
       }}
       refreshControl={
         <RefreshControl
-          refreshing={isRefreshing && !isLoadMore}
+          refreshing={isRefreshing && !isLoadingMore}
           onRefresh={handleRefresh}
         />
       }
-      onViewableItemsChanged={onViewableItemsChanged}
     />
   );
 };
