@@ -136,5 +136,9 @@ E2E tests are located in the `e2e` directory:
 
 For more detailed information about Detox testing in this project, see the [e2e/README.md](./e2e/README.md) file.
 
-## Project Structure
+## Project
+
+![Simulator Screenshot - iPhone 16 Pro - 2025-03-30 at 15 38 43](https://github.com/user-attachments/assets/2612c054-56e7-4ac3-835c-c8210ebe4ae3)
+![Screenshot_1743324027](https://github.com/user-attachments/assets/52f581d8-6a20-40b2-9f08-d516c4615af7)
+
 
