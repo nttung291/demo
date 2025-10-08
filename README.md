@@ -174,6 +174,11 @@ The codebase follows best practices for:
 - **Readability**: Well-structured components with clear responsibilities
 - **Maintainability**: Modular architecture that makes it easy to extend and modify
 
+## App Screens
+
+<img width="1206" height="2622" alt="Simulator Screenshot - iPhone 16 Pro - 2025-10-09 at 02 21 56" src="https://github.com/user-attachments/assets/9d5876a9-e1e4-4418-baf2-d9923686cb65" />
+<img width="1206" height="2622" alt="Simulator Screenshot - iPhone 16 Pro - 2025-10-09 at 02 21 52" src="https://github.com/user-attachments/assets/a31880af-d4c4-4c13-b812-96d1548f238f" />
+
 ## License
 
 This project is licensed under the MIT License.
