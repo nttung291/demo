@@ -3,8 +3,11 @@ import {
   StackNavigationOptions,
   createStackNavigator,
 } from "@react-navigation/stack";
-import { HomeScreen, LoginScreen, NewInvoiceScreen } from "@screens";
+import { HomeScreen, LoginScreen } from "@screens";
 import { RootStackParamList } from "@types";
+import { DetailScreen } from "src/screens/detail";
+import { PokemonListScreen } from "src/screens/pokemon";
+import { PokemonDetailScreen } from "src/screens/pokemon-detail";
 
 const defaultOptions: StackNavigationOptions = {
   headerShown: false,
@@ -25,24 +28,39 @@ const defaultOptions: StackNavigationOptions = {
 
 export const enum ScreenNavigatorKeys {
   Home = "Home",
+  Detail = "Detail",
   Login = "Login",
-  NewInvoice = "NewInvoice",
+  PokemonList = "PokemonList",
+  PokemonDetail = "PokemonDetail",
 }
 
 const AppStack = createStackNavigator<RootStackParamList>();
 
 export function MainStackScreen() {
   return (
-    <AppStack.Navigator initialRouteName={ScreenNavigatorKeys.Home}>
+    <AppStack.Navigator initialRouteName={ScreenNavigatorKeys.PokemonList}>
       <AppStack.Screen
-        name={ScreenNavigatorKeys.Home}
-        component={HomeScreen}
-        options={defaultOptions}
+        name={ScreenNavigatorKeys.PokemonList}
+        component={PokemonListScreen}
+        options={{
+          ...defaultOptions,
+          headerShown: true,
+          headerTitle: "Pokémon",
+          headerTitleStyle: {
+            fontSize: 20,
+            fontWeight: "700",
+          },
+        }}
       />
       <AppStack.Screen
-        name={ScreenNavigatorKeys.NewInvoice}
-        component={NewInvoiceScreen}
-        options={defaultOptions}
+        name={ScreenNavigatorKeys.PokemonDetail}
+        component={PokemonDetailScreen}
+        options={{
+          ...defaultOptions,
+          headerShown: true,
+          headerTitle: "",
+          headerBackTitleVisible: false,
+        }}
       />
     </AppStack.Navigator>
   );

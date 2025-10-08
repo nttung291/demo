@@ -16,7 +16,13 @@ export const setKeychainItem = async (data: Partial<TokenData>): Promise<void> =
     const existingData = credentials ? JSON.parse(credentials.password) : {};
     const newData = { ...existingData, ...data };
 
-    await Keychain.setGenericPassword(StorageKey.TOKEN, JSON.stringify(newData));
+    await Keychain.setGenericPassword(StorageKey.TOKEN, JSON.stringify(newData), 
+    // {
+    //   accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_ANY,  // Use Face ID / Fingerprint
+    //   accessible: Keychain.ACCESSIBLE.WHEN_UNLOCKED,
+    //   securityLevel: Keychain.SECURITY_LEVEL.SECURE_HARDWARE,  // ✅ Uses StrongBox if available, otherwise TEE
+    // }
+    );
   } catch (error) {
     console.log("Error setting token data:", error);
     throw error;

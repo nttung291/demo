@@ -10,8 +10,6 @@ import { useLazyGetInvoicesQuery } from "@services";
 import { deleteKeychainItem, Ordering, SortBy } from "@helpers";
 import { setAuthenticated, useAppDispatch } from "@state";
 import { InvoiceResponse } from "@types";
-import { InvoiceItem } from "./components/InvoiceItem";
-import { FilterModal } from "./components/FilterModal";
 import { navigate, ScreenNavigatorKeys } from "@navigators";
 import styles from "./styles";
 
@@ -48,7 +46,7 @@ export const HomeScreen: React.FC = () => {
   };
 
   const onNewInvoicePress = () => {
-    navigate(ScreenNavigatorKeys.NewInvoice);
+    navigate(ScreenNavigatorKeys.Detail);
   };
 
   const onOptionsChange = (options: Options) => {
@@ -61,11 +59,6 @@ export const HomeScreen: React.FC = () => {
   return (
     <LayoutContainer>
       <View style={styles.container}>
-        <FilterModal
-          visible={visible}
-          setVisible={setVisible}
-          onSetFilter={(sortBy, ordering) => setOptions({ sortBy, ordering })}
-        />
         <View style={styles.filterContainer}>
           <SearchBar
             onChangeText={(text) =>
@@ -79,13 +72,6 @@ export const HomeScreen: React.FC = () => {
             Filter
           </Button>
         </View>
-        <PaginationList
-          items={items}
-          filters={options}
-          setItems={setItems}
-          renderItem={({ item }) => <InvoiceItem item={item} />}
-          getData={fetchInvoices}
-        />
         <Button mode="text" onPress={onNewInvoicePress}>
           Create new invoice
         </Button>

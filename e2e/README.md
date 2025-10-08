@@ -45,6 +45,7 @@ yarn e2e:test:android
 ## Test Files
 
 - `login.test.js` - Tests for the Login screen functionality
+- `pokemon.test.js` - Tests for the Pokemon list and detail screens
 
 ## Adding New Tests
 
@@ -53,6 +54,45 @@ To add new tests:
 1. Create a new test file in the `e2e` directory
 2. Add testID attributes to your React Native components for easier selection
 3. Use Detox's element selection and matchers to write your tests
+
+## Pokemon Tests
+
+The Pokemon tests (`pokemon.test.js`) cover the main user flows in the Pokemon app:
+
+1. **List Screen Tests**
+   - Verifying the Pokemon list loads correctly
+   - Testing pagination by scrolling to load more Pokemon
+
+2. **Detail Screen Tests**
+   - Navigating to the detail screen by tapping a Pokemon
+   - Verifying Pokemon details are displayed correctly
+   - Checking that Pokemon types are shown
+   - Validating that stat bars are displayed
+
+3. **Navigation Tests**
+   - Testing navigation between list and detail screens
+   - Verifying back navigation works correctly
+
+4. **Device Interaction Tests**
+   - Testing device rotation (portrait/landscape)
+   - Testing app backgrounding and foregrounding
+
+### Required testIDs
+
+The Pokemon tests rely on the following testIDs being present in your components:
+
+- `pokemon-list` - The main Pokemon list component
+- `pokemon-item-{index}` - Individual Pokemon items in the list
+- `pokemon-name-{index}` - Pokemon name elements in the list
+- `pokemon-detail-scroll` - The ScrollView in the detail screen
+- `pokemon-name` - The Pokemon name in the detail screen
+- `pokemon-image` - The Pokemon image in the detail screen
+- `pokemon-type-{index}` - Type tags in the detail screen
+- `stats-container` - Container for stats in the detail screen
+- `stat-bar-{index}` - Individual stat bars
+- `stat-row-{index}` - Rows containing stat information
+- `physical-attributes` - Container for physical attributes
+- `abilities-container` - Container for abilities
 
 ## Best Practices
 

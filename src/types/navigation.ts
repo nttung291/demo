@@ -1,5 +1,7 @@
 export type RootStackParamList = {
   Home: undefined;
   Login: undefined;
-  NewInvoice: undefined;
+  Detail: undefined;
+  PokemonList: undefined;
+  PokemonDetail: { pokemonId: string | number };
 };

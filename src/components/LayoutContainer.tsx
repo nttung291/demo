@@ -1,6 +1,10 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import { MD2Colors as Colors, useTheme } from "react-native-paper";
+import { StyleSheet, View } from "react-native";
+import {
+  ActivityIndicator,
+  MD2Colors as Colors,
+  useTheme,
+} from "react-native-paper";
 import {
   SafeAreaView,
   SafeAreaViewProps,
@@ -9,19 +13,25 @@ import {
 export const LayoutContainer = ({
   children,
   disabledSafeView,
+  isLoading,
   ...props
-}: { disabledSafeView?: boolean } & Omit<
+}: { disabledSafeView?: boolean; isLoading?: boolean } & Omit<
   SafeAreaViewProps,
   "disabledSafeView"
 >): JSX.Element => {
-  const theme = useTheme();
   return (
     <SafeAreaView
       style={styles.container}
-      edges={disabledSafeView ? [] : ["top", "left", "right", "bottom"]}
+      edges={disabledSafeView ? ["bottom"] : ["top", "left", "right", "bottom"]}
       {...props}
     >
-      {children}
+      {isLoading ? (
+        <View style={styles.centered}>
+          <ActivityIndicator size="large" color="#A32EFF" />
+        </View>
+      ) : (
+        children
+      )}
     </SafeAreaView>
   );
 };
@@ -29,7 +39,11 @@ export const LayoutContainer = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.grey900,
-    paddingTop: 12,
+    backgroundColor: "#f5f5f5",
+  },
+  centered: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

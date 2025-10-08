@@ -2,11 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import { useFormik } from "formik";
 import { Button, H1, Input, LayoutContainer } from "@components";
-import {
-  PasswordSchema,
-  setKeychainItem,
-  UsernameSchema,
-} from "@helpers";
+import { PasswordSchema, setKeychainItem, UsernameSchema } from "@helpers";
 import { useLazyGetUserQuery, useLoginMutation } from "@services";
 import { useDispatch } from "react-redux";
 import { setAuthenticated } from "@state";
@@ -58,40 +54,6 @@ export const LoginScreen: React.FunctionComponent = () => {
         }
       },
     });
-  return (
-    <LayoutContainer testID="login-screen">
-      <View style={styles.container}>
-        <H1 testID="login-title">Login</H1>
-        <View style={styles.inputContainer}>
-          <Input
-            testID="username-input"
-            containerStyle={styles.input}
-            onChangeText={handleChange("username")}
-            value={values.username}
-            placeholder="Username"
-            errorMessage={errors?.username}
-            keyboardType="number-pad"
-          />
-          <Input
-            testID="password-input"
-            containerStyle={styles.input}
-            onChangeText={handleChange("password")}
-            value={values.password}
-            placeholder="Password"
-            secureTextEntry
-            errorMessage={errors?.password}
-          />
-        </View>
-        <Button
-          testID="login-button"
-          style={styles.button}
-          type="medium"
-          onPress={handleSubmit}
-          loading={isFetchingUser || isLoginLoading}
-        >
-          Login
-        </Button>
-      </View>
-    </LayoutContainer>
-  );
+
+  return <LayoutContainer testID="login-screen"></LayoutContainer>;
 };

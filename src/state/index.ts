@@ -17,6 +17,7 @@ import reducers from "./reducers";
 import {
   authApiMiddlewares,
   appApiMiddlewares,
+  pokemonApiMiddlewares,
   serviceReducer,
 } from "@services";
 
@@ -40,7 +41,7 @@ export const store = configureStore({
         warnAfter: 128,
       },
       immutableCheck: false,
-    }).concat([...authApiMiddlewares, ...appApiMiddlewares]),
+    }).concat([...authApiMiddlewares, ...appApiMiddlewares, ...pokemonApiMiddlewares]),
 });
 
 export const persistor = persistStore(store);

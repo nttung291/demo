@@ -12,7 +12,7 @@ export const AppNavigator = (props: NavigationProps) => {
 
   return (
     <NavigationContainer ref={navigationRef} {...props}>
-      {isAuthenticated ? <MainStackScreen /> : <AuthStackScreen />}
+      <MainStackScreen />
     </NavigationContainer>
   );
 };

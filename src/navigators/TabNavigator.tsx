@@ -19,7 +19,7 @@ export function MainTabNavigator() {
         name={"HomeTab"}
         component={HomeScreen}
         options={{
-          tabBarLabel: "Orders",
+          tabBarLabel: "Home",
         }}
       />
     </Tab.Navigator>

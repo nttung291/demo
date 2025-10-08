@@ -1,144 +1,179 @@
-## DemoApp
+# Pokemon Explorer App
 
-A modern React Native application showcasing best practices in mobile development.
+A React Native application that retrieves and displays Pokemon data from the PokeAPI. The app showcases best practices in mobile development with a focus on clean code, maintainability, and testability.
 
-Currently includes:
+## Features
 
-- React Native (0.74.5)
-- React Navigation (Stack, Bottom Tabs, Native)
-- Redux with Redux Toolkit for state management
+- Browse a paginated list of Pokemon
+- View detailed information about each Pokemon
+- Persistent data storage with Redux Persist
+- Error handling and retry mechanisms
+- Unit tests with over 60% code coverage
+- Component-level unit tests for better maintainability
+- End-to-end tests with Detox
+
+## Tech Stack
+
+- React Native 0.74.5
 - TypeScript for type safety
-- Form handling with Formik and Yup validation
-- API integration with Axios and GraphQL
-- Secure storage with Keychain
-- Performance optimized with FlashList
-- Automated UI testing with Detox
-- And more!
+- Redux Toolkit for state management
+- RTK Query for API data fetching with caching
+- React Navigation for screen navigation
+- Jest and React Testing Library for unit testing
+- Detox for end-to-end testing
 
-## Quick Start
+## Project Structure
 
-From the command line in your generated app's root directory, enter `yarn`
-
-From the demo/ios folder, enter `pod install`
-
-The Demo project's structure will look similar to this:
+The project follows a clean, modular architecture:
 
 ```
 demo
 ├── src
-│   ├── assets
-│   ├── components
-│   ├── context
-│   ├── helpers
-│   ├── navigators
-│   ├── screens
-│   ├── services
-│   ├── storage
-│   ├── theme
-│   ├── app.tsx
-├── README.md
-├── index.js
-├── test
-├── .env
-└── package.json
-
+│   ├── screens
+│   │   └── pokemon
+│   │       ├── PokemonListScreen.tsx - Displays paginated list of Pokemon
+│   │       ├── components/ - Reusable components for Pokemon list
+│   │       └── __tests__ - Unit tests for Pokemon list screen
+│   │   └── pokemon-detail
+│   │       ├── index.tsx - Shows detailed Pokemon information
+│   │       ├── components/ - Component-based architecture for details
+│   │       │   ├── PokemonHeader.tsx - Pokemon image, name, and types
+│   │       │   ├── PokemonStats.tsx - Pokemon stats with visual bars
+│   │       │   ├── PokemonAttributes.tsx - Physical attributes display
+│   │       │   ├── PokemonAbilities.tsx - Pokemon abilities list
+│   │       │   └── __tests__ - Unit tests for each component
+│   │       └── __tests__ - Integration tests for Pokemon detail screen
+│   ├── services
+│   │   └── pokemonApi.ts - RTK Query API service for PokeAPI
+│   ├── navigators - Navigation configuration
+│   ├── state - Redux store setup
+│   └── types - TypeScript type definitions
+├── scripts
+│   └── set-api-url.js - Script to configure API base URL
+└── POKEMON_README.md - This file
 ```
 
-**assets**
-This is where your app assets will live.
+## Getting Started
 
-**components**
-This is where your React components will live. Each component will have a directory containing the `.tsx` file, along with a story file, and optionally `.presets`, and `.props` files for larger components. The app will come with some commonly used components like Button.
+### Prerequisites
 
-**navigators**
-This is where your `react-navigation` navigators will live.
+- Node.js 14 or higher
+- Yarn or npm
+- React Native development environment set up
 
-**context**
-This is where your context api will live. Each Context will have a directory containing the `.tsx` file.
+### Installation
 
-**screens**
-This is where your screen components will live. A screen is a React component which will take up the entire screen and be part of the navigation hierarchy. Each screen will have a directory containing the `.tsx` file, along with any assets or other helper files.
+1. Clone the repository
+   ```bash
+   git clone <repository-url>
+   cd demo
+   ```
 
-**services**
-Any services that interface with the outside world will live here (think REST APIs, Push Notifications, etc.).
+2. Install dependencies
+   ```bash
+   yarn install
+   ```
 
-**theme**
-Here lives the theme for your application, including spacing, colors, and typography.
+3. Install iOS dependencies (macOS only)
+   ```bash
+   yarn pod-install
+   ```
 
-**helpers**
-This is a great place to put miscellaneous helpers and utilities. Things like date helpers, formatters, etc. are often found here. However, it should only be used for things that are truely shared across your application. If a helper or utility is only used by a specific component or model, consider co-locating your helper with that component or model.
+### Running the App
 
-**app.tsx** This is the entry point to your app. This is where you will find the main App component which renders the rest of the application.
+#### With default PokeAPI URL
 
-## Running IOS
+```bash
+# Start the Metro bundler with default PokeAPI URL
+yarn start:pokemon
 
-From the command line in your generated app's root directory, enter `yarn ios`
+# Run on iOS
+yarn ios
 
-## Running Android
+# Run on Android
+yarn android
+```
 
-From the command line in your generated app's root directory, enter `yarn android`
+#### With custom API URL
+
+```bash
+# Start the Metro bundler with custom API URL
+API_URL=https://your-custom-api.com/api/v2 yarn start:pokemon:custom
+
+# Run on iOS
+yarn ios
+
+# Run on Android
+yarn android
+```
 
 ## Testing
 
-The project includes both unit tests and end-to-end (E2E) UI tests.
-
-### Unit Testing
-
-Unit tests are written using Jest. Run the tests with:
+### Running Unit Tests
 
 ```bash
+# Run all tests
 yarn test
+
+# Run tests with coverage report
+yarn test:coverage
+
+# Run tests for a specific component
+yarn test PokemonHeader
 ```
 
-### End-to-End Testing with Detox
-
-The project uses Detox for automated UI testing. Detox allows you to write and execute UI tests that simulate real user interactions.
-
-#### Prerequisites
-
-Before running Detox tests, make sure you have the following installed:
+### Running End-to-End Tests
 
 ```bash
-# For iOS testing
-brew tap wix/brew
-brew install applesimutils
-```
-
-#### Running E2E Tests
-
-For iOS:
-
-```bash
-# Build the app for testing
+# Build for iOS E2E testing
 yarn e2e:build:ios
 
-# Run the tests
+# Run E2E tests on iOS
 yarn e2e:test:ios
-```
 
-For Android:
-
-```bash
-# Build the app for testing
+# Build for Android E2E testing
 yarn e2e:build:android
 
-# Run the tests
+# Run E2E tests on Android
 yarn e2e:test:android
 ```
 
-#### Test Structure
+### Test Coverage
 
-E2E tests are located in the `e2e` directory:
+The project aims for at least 60% code coverage across:
+- Branches
+- Functions
+- Lines
+- Statements
 
-- `e2e/login.test.js` - Tests for the Login screen functionality
-- `e2e/jest.setup.js` - Setup file for Jest with Detox
-- `e2e/jest.config.js` - Jest configuration for Detox tests
+### Test Structure
 
-For more detailed information about Detox testing in this project, see the [e2e/README.md](./e2e/README.md) file.
+#### Unit Tests
+- **Screen Tests**: Test the main screen components
+- **Component Tests**: Test individual UI components in isolation
+- **API Tests**: Test the RTK Query service layer
 
-## Project
+#### E2E Tests
+- **User Flow Tests**: Test complete user journeys through the app
+- **Navigation Tests**: Test navigation between screens
+- **Data Loading Tests**: Test loading and pagination behavior
 
-![Simulator Screenshot - iPhone 16 Pro - 2025-03-30 at 15 38 43](https://github.com/user-attachments/assets/2612c054-56e7-4ac3-835c-c8210ebe4ae3)
-![Screenshot_1743324027](https://github.com/user-attachments/assets/52f581d8-6a20-40b2-9f08-d516c4615af7)
+## API Integration
 
+The app integrates with the [PokeAPI](https://pokeapi.co/), a RESTful Pokemon API. The following endpoints are used:
 
+- `GET /pokemon` - Retrieves a paginated list of Pokemon
+- `GET /pokemon/{id}` - Retrieves detailed information about a specific Pokemon
+
+## Code Quality
+
+The codebase follows best practices for:
+
+- **Code Separation**: Clear separation of concerns between UI components, business logic, and data fetching
+- **Clean Code**: Meaningful variable names, consistent formatting, and proper error handling
+- **Readability**: Well-structured components with clear responsibilities
+- **Maintainability**: Modular architecture that makes it easy to extend and modify
+
+## License
+
+This project is licensed under the MIT License.

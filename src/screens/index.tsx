@@ -1,3 +1,4 @@
 export * from "./home";
 export * from "./login";
-export * from "./new-invoice";
+export * from "./pokemon";
+export * from "./pokemon-detail";
