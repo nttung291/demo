@@ -84,8 +84,8 @@ demo
 #### With default PokeAPI URL
 
 ```bash
-# Start the Metro bundler with default PokeAPI URL
-yarn start:pokemon
+# Start the Metro bundler
+yarn start
 
 # Run on iOS
 yarn ios
@@ -98,7 +98,7 @@ yarn android
 
 ```bash
 # Start the Metro bundler with custom API URL
-API_URL=https://your-custom-api.com/api/v2 yarn start:pokemon:custom
+API_URL=https://your-custom-api.com/api/v2 yarn start
 
 # Run on iOS
 yarn ios
