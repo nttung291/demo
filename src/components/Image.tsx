@@ -1,10 +1,10 @@
-import React, { ComponentProps } from 'react';
-import FastImage from 'react-native-fast-image';
+import React, { ComponentProps } from "react";
+import { Image as ExpoImage } from "expo-image";
 
-export type ImageProps = {} & ComponentProps<typeof FastImage>;
+export type ImageProps = {} & ComponentProps<typeof ExpoImage>;
 
 export const Image = ({ source, ...props }: ImageProps): JSX.Element => {
   return (
-    <FastImage source={source} {...props} resizeMode="contain"></FastImage>
+    <ExpoImage source={source} {...props} resizeMode="contain"></ExpoImage>
   );
 };

@@ -1,9 +1,9 @@
-import React from 'react';
-import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
-import FastImage, { Source } from 'react-native-fast-image';
+import React from "react";
+import { StyleProp, StyleSheet, ViewStyle } from "react-native";
+import { Image } from "./Image";
 
 export type ImageBackgroundProps = {
-  source: number | Source;
+  source: number | string;
   containerStyle?: StyleProp<ViewStyle>;
 };
 
@@ -12,20 +12,15 @@ export const ImageBackground = ({
   ...props
 }: ImageBackgroundProps): JSX.Element => {
   return (
-    <FastImage
-      resizeMode="cover"
-      source={source}
-      style={styles.image}
-      {...props}
-    />
+    <Image resizeMode="cover" source={source} style={styles.image} {...props} />
   );
 };
 
 const styles = StyleSheet.create({
   image: {
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
+    width: "100%",
+    height: "100%",
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
