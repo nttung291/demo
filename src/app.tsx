@@ -9,8 +9,9 @@ import { AppContextContainer } from "./context";
 import { CombinedDefaultTheme } from "./theme";
 import { AppNavigator } from "../src/navigators";
 import { Provider } from "react-redux";
-import "react-native-gesture-handler";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { store, persistor } from "./state/store";
+import "react-native-gesture-handler";
 
 const App = () => {
   return (
@@ -19,7 +20,9 @@ const App = () => {
         <SafeAreaProvider initialMetrics={initialWindowMetrics}>
           <AppContextContainer>
             <PaperProvider theme={CombinedDefaultTheme}>
-              <AppNavigator theme={CombinedDefaultTheme} />
+              <BottomSheetModalProvider>
+                <AppNavigator theme={CombinedDefaultTheme} />
+              </BottomSheetModalProvider>
             </PaperProvider>
           </AppContextContainer>
         </SafeAreaProvider>

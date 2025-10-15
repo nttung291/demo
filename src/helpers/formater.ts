@@ -1,4 +1,3 @@
-// Dollar formatter
 export const SmallUSDollar = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 1,
   maximumFractionDigits: 5,

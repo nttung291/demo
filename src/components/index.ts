@@ -7,3 +7,6 @@ export * from "./IconButton";
 export * from "./NumericInput";
 export * from "./PaginationList";
 export * from "./SearchBar";
+export * from "./BottomSheet";
+export * from "./Chip";
+export * from "./ActionButton";

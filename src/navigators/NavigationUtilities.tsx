@@ -6,6 +6,7 @@ import {
   NavigationAction,
   createNavigationContainerRef,
 } from "@react-navigation/native";
+import { RootStackParamList } from "@types";
 
 export const RootNavigation = {
   navigate(_name: string, _params?: any) {},
@@ -17,7 +18,7 @@ export const RootNavigation = {
   dispatch(_action: NavigationAction) {},
 };
 
-export const navigationRef = createNavigationContainerRef();
+export const navigationRef = createNavigationContainerRef<RootStackParamList>();
 
 /**
  * Gets the current screen from any navigation state.
@@ -28,12 +29,10 @@ export function getActiveRouteName(
   const { index } = state;
   const route = state.routes[index || 0];
 
-  // Found the active route -- return the name
   if (!route.state) {
     return route.name;
   }
 
-  // Recursive call to deal with nested routers
   return getActiveRouteName(route.state);
 }
 
@@ -45,23 +44,15 @@ export function useBackButtonHandler(canExit: (routeName: string) => boolean) {
   }, [canExit]);
 
   useEffect(() => {
-    // We'll fire this when the back button is pressed on Android.
     const onBackPress = () => {
       if (!navigationRef.isReady()) {
         return false;
       }
-
-      // grab the current route
       const routeName = getActiveRouteName(navigationRef.getRootState());
-
-      // are we allowed to exit?
       if (canExitRef.current(routeName)) {
-        // exit and let the system know we've handled the event
         BackHandler.exitApp();
         return true;
       }
-
-      // we can't exit, so let's turn this into a back action
       if (navigationRef.canGoBack()) {
         navigationRef.goBack();
         return true;
@@ -70,12 +61,12 @@ export function useBackButtonHandler(canExit: (routeName: string) => boolean) {
       return false;
     };
 
-    // Subscribe when we come to life
-    BackHandler.addEventListener("hardwareBackPress", onBackPress);
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      onBackPress
+    );
 
-    // Unsubscribe when we're done
-    return () =>
-      BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+    return () => backHandler.remove();
   }, []);
 }
 

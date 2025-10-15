@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, View, StyleSheet } from "react-native";
+import { TouchableOpacity, View, StyleSheet, ViewStyle } from "react-native";
 import { MD2Colors as Colors, TextInput } from "react-native-paper";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
@@ -11,6 +11,7 @@ type Props = {
   placeholder?: string;
   value: string;
   onSubmitEditing?: () => void;
+  containerStyle?: ViewStyle;
 };
 
 export const SearchBar = ({
@@ -20,10 +21,11 @@ export const SearchBar = ({
   placeholder = "",
   value,
   autoFocus = false,
+  containerStyle = {},
   ...rest
 }: Props) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, containerStyle]}>
       <TouchableOpacity
         onPress={onSearchPress}
         style={styles.searchIconContainer}
