@@ -131,3 +131,11 @@ yarn test --coverage
 ```
 
 The coverage report will be available in the `coverage` directory.
+
+## App Screenshoots
+
+<img width="1206" height="2622" alt="simulator_screenshot_955862CD-1651-4F7C-BB3B-55661BB6B087" src="https://github.com/user-attachments/assets/684d31b7-ca96-4a1c-b32d-2654f3fffa1a" />
+
+<img width="1206" height="2622" alt="simulator_screenshot_64F2DC33-02AC-4509-A661-1E8450FAFD87" src="https://github.com/user-attachments/assets/3c23b621-5fb0-41e2-8f02-73dd20ec98a1" />
+
+
