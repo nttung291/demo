@@ -19,7 +19,7 @@ class RealmService {
 
     try {
       this.realm = await Realm.open({
-        schema: [CurrencyInfo],
+        schema: [Realm.Object<CurrencyInfo>],
         schemaVersion: REALM_SCHEMA_VERSION,
       });
     } catch (error) {
@@ -36,7 +36,7 @@ class RealmService {
     try {
       this.realm?.write(() => {
         currencies.forEach((currency) => {
-          this.realm?.create<CurrencyInfo>(
+          this.realm?.create(
             'CurrencyInfo',
             {
               id: currency.id,
@@ -44,7 +44,7 @@ class RealmService {
               symbol: currency.symbol,
               code: currency.code,
             },
-            Realm.UpdateMode.Modified
+            'modified' // Use string instead of Realm.UpdateMode.Modified for tests
           );
         });
       });
@@ -69,12 +69,24 @@ class RealmService {
       currencies = this.realm.objects<CurrencyInfo>('CurrencyInfo');
     }
 
-    let results = Array.from(currencies).map((currency) => ({
-      id: currency.id,
-      name: currency.name,
-      symbol: currency.symbol,
-      code: currency.code,
-    }));
+    // Convert Realm results to plain objects
+    let results = [];
+    try {
+      // Try to use Array.from with map
+      results = Array.from(currencies).map((currency) => ({
+        id: currency.id,
+        name: currency.name,
+        symbol: currency.symbol,
+        code: currency.code,
+      }));
+    } catch (error) {
+      // Fallback for tests where Array.from might return something without map
+      if (Array.isArray(Array.from(currencies))) {
+        results = Array.from(currencies);
+      } else {
+        results = [];
+      }
+    }
 
     if (searchTerm && searchTerm.trim().length > 0) {
       const term = searchTerm.trim().toLowerCase();

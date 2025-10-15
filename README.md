@@ -71,3 +71,61 @@ From the command line in your generated app's root directory, enter `yarn ios`
 ## Running Android
 
 From the command line in your generated app's root directory, enter `yarn android`
+
+## Testing
+
+### Unit Tests
+
+This project uses Jest for unit testing. To run the unit tests, use the following command:
+
+```bash
+yarn test
+```
+
+Unit tests are located in the `__tests__` directory and follow the naming convention `*.test.tsx` or `*.test.ts`.
+
+#### Test Structure
+
+- `__tests__/components/` - Tests for individual components
+- `__tests__/screens/` - Tests for screen components
+- `__tests__/services/` - Tests for services
+
+### E2E Tests
+
+This project uses Detox for end-to-end testing. To run the E2E tests, follow these steps:
+
+1. Install Detox CLI globally:
+
+```bash
+npm install -g detox-cli
+```
+
+2. Build the app for testing:
+
+```bash
+detox build --configuration ios.sim.debug
+```
+
+3. Run the tests:
+
+```bash
+detox test --configuration ios.sim.debug
+```
+
+E2E tests are located in the `e2e` directory.
+
+#### Test Structure
+
+- `e2e/homeScreen.test.js` - Tests for the home screen
+- `e2e/currencyList.test.js` - Tests for the currency list functionality
+- `e2e/actionBottomSheet.test.js` - Tests for the action bottom sheet
+
+### Test Coverage
+
+To generate a test coverage report, run:
+
+```bash
+yarn test --coverage
+```
+
+The coverage report will be available in the `coverage` directory.
