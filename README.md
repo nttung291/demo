@@ -30,6 +30,8 @@ demo
 │   ├── storage
 │   ├── theme
 │   ├── app.tsx
+├── __tests__
+├── e2e
 ├── README.md
 ├── index.js
 ├── test
